@@ -1,1 +1,92 @@
-<html><body><h1>Gateway Appraisal</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gateway Appraisal</title>
+    <link rel="manifest" href="/static/manifest.json" />
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script defer src="/static/script.js"></script>
+</head>
+<body>
+
+    <!-- Welcome screen for first-time users -->
+    <div id="welcomeScreen" class="screen active">
+        <div class="welcome-message">
+            <h1>Good morning.</h1>
+            <p>What’s your dealer name?</p>
+            <input type="text" id="dealerNameInput" placeholder="Enter your dealer name" />
+            <button id="dealerNameSubmit">Continue</button>
+        </div>
+    </div>
+
+    <!-- Main form -->
+    <div id="mainForm" class="screen hidden">
+        <header>
+            <div class="branding">
+                <span class="logo-button" onclick="adminAccess()">Gateway Leasing</span>
+            </div>
+        </header>
+
+        <!-- Smart quote under title -->
+        <div class="form-header">
+            <h2>Vehicle Appraisal Form</h2>
+            <p id="wittyQuote">"Does it run? Does it roll? Let’s find out."</p>
+        </div>
+
+        <form id="appraisalForm" enctype="multipart/form-data">
+            <input type="text" name="vin" id="vin" placeholder="VIN Number" required />
+            <input type="text" name="kms" id="kms" placeholder="KM (e.g., 123456)" required />
+            <input type="file" name="photos" id="photos" multiple accept="image/*" />
+            <textarea name="notes" placeholder="Notes or vehicle condition (optional)"></textarea>
+            <input type="email" name="email" placeholder="Your Email (optional)" />
+            <input type="tel" name="phone" placeholder="Your Phone (optional)" />
+
+            <button type="submit" class="submit-btn">Submit Appraisal</button>
+        </form>
+
+        <!-- VIN Scanner toggle -->
+        <button id="scanVinBtn" onclick="startVinScan()">📷 Scan VIN</button>
+        <button id="cancelScanBtn" class="hidden" onclick="cancelVinScan()">Cancel Scan</button>
+
+        <!-- Scanner display -->
+        <div id="vinScanner" class="hidden">
+            <div id="scanner"></div>
+        </div>
+    </div>
+
+    <!-- Thank You screen -->
+    <div id="thankYouScreen" class="screen hidden">
+        <div class="thank-you">
+            <h1>Thank You!</h1>
+            <p>Your vehicle has been sent in for appraisal.</p>
+            <h3>What’s next?</h3>
+            <ul>
+                <li>We’ll review your unit</li>
+                <li>You’ll get a response shortly</li>
+                <li>Keep an eye on your email</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Help menu modal -->
+    <div id="helpModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>How To</h2>
+            <ul>
+                <li>Scan the VIN or enter it manually</li>
+                <li>Take clear damage photos</li>
+                <li>Add notes if needed</li>
+                <li>Submit. Done!</li>
+            </ul>
+            <button onclick="closeHelp()">Close</button>
+        </div>
+    </div>
+
+    <!-- Small footer -->
+    <footer>
+        <p style="font-size: 12px; color: lightgray; text-align: center;">myappraisal.ca</p>
+    </footer>
+</body>
+</html>
